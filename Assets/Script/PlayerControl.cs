@@ -2,7 +2,6 @@
 using System.Collections;   
 using System.Collections.Generic;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class PlayerControl : MonoBehaviour
     [Tooltip("In ms^-1")][SerializeField] float movementSpeed = 4f;
     [Tooltip("In m")][SerializeField] float xRange = 5f;
     [Tooltip("In m")][SerializeField] float yRange = 5f;
+    [SerializeField] GameObject[] guns;
 
     [Header("Control-Positional Factor")]
     [SerializeField] float positionalPitchFactor = -5f;
@@ -24,8 +24,37 @@ public class PlayerControl : MonoBehaviour
     {
         if (isControlEnabled)
         {
+            ProcessFire();
             ProcessTranslation();
             ProcessRotation();
+        }
+    }
+
+    private void ProcessFire()
+    {
+        if(Input.GetButton("Fire1"))
+        {
+            ActivateGuns();
+        }
+        else
+        {
+            DeactivateGuns();
+        }
+    }
+
+
+    private void ActivateGuns()
+    {
+        foreach(GameObject gun in guns)
+        {
+            gun.SetActive(true);
+        }
+    }
+    private void DeactivateGuns()
+    {
+        foreach (GameObject gun in guns)
+        {
+            gun.SetActive(false);
         }
     }
 

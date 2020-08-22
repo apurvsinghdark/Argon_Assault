@@ -17,7 +17,7 @@ public class CollisionHandler : MonoBehaviour
 
     private void StartDeathReference()
     {
-        print("Death");
+       // print("Death");
         SendMessage("OnPlayerDeath");
     }
 
